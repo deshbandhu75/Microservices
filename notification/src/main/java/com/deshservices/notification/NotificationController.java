@@ -1,4 +1,5 @@
-import com.deshservices.notification.NotificationRequest;
+package com.deshservices.notification;
+import com.deshservice.clients.notification.NotificationRequest;
 import com.deshservices.notification.NotificationService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
