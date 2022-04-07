@@ -17,6 +17,8 @@ spring:
     username: amigoscode
     password: password
     url: jdbc:postgresql://localhost:5432/fraud
+  zipkin:
+    base-url: http://localhost:9411
 
 eureka:
   client:
