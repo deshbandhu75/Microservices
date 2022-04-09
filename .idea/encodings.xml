@@ -4,6 +4,10 @@
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Eureka/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Eureka/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/amqp/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/amqp/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/apigw/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/apigw/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/clients/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/clients/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/customer" charset="UTF-8" />
