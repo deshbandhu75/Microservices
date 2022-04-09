@@ -23,11 +23,13 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.version>MyTest</project.version>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
       <spring.boot.maven.plugin.version>2.6.5</spring.boot.maven.plugin.version>
       <spring.boot.dependencies.version>2.6.5</spring.boot.dependencies.version>
       <spring.cloud-version>2021.0.1</spring.cloud-version>
+      <image>deshbandhu1975/${project.artifactId}:${project.version}</image>
 
   </properties>
 
@@ -74,6 +76,30 @@
               <groupId>org.springframework.boot</groupId>
               <artifactId>sprint-boot-maven-plugin</artifactId>
               <version>${sprint.boot.maven.plugin.version}</version>
+          </plugin>
+          <plugin>
+              <groupId>com.google.cloud.tools</groupId>
+              <artifactId>jib.maven.plugin</artifactId>
+              <version>3.1.4</version>
+              <configuration>
+                  <from>
+                      <image>elipse-temurin:17@sha256:7d51a0f8691eb78c9062fd31984423a93d276a67b4ed5d1a706e1c2cd9fea23a</image>
+                      <platform>
+                          <architecture>x86</architecture>
+                          <os>
+                              linux
+                          </os>
+                      </platform>
+
+                  </from>
+
+                  <to>
+                        <tags>
+                            <tag>latest</tag>
+                        </tags>
+                  </to>
+
+              </configuration>
           </plugin>
 
       </plugins>
