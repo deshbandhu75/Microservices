@@ -42,7 +42,7 @@ services:
       - "5672:5672"
       - "15672:15672"
   apigw:
-    image: amigoscode/apigw:latest
+    image: desh1977/apigw:latest
     container_name: apigw
     ports:
       - "8083:8083"
@@ -54,7 +54,7 @@ services:
       - zipkin
       - eureka-server
   eureka-server:
-    image: deshbandhu1975/eureka-server:latest
+    image: deshbandhu1977/eureka-server:latest
     container_name: eureka-server
     ports:
       - "8761:8761"
