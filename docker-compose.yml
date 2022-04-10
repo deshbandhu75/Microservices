@@ -13,24 +13,23 @@ services:
     networks:
       - postgres
     restart: unless-stopped
-
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-deshbandhu@gmail.com}
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     volumes:
       - pgadmin:/var/lib/pgadmin
     ports:
-      - "5051:80"
+      - "5050:80"
     networks:
       - postgres
     restart: unless-stopped
   zipkin:
-    container_name: zipkin
     image: openzipkin/zipkin
+    container_name: zipkin
     ports:
       - "9411:9411"
     networks:
@@ -41,8 +40,21 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    networks:
+      - spring
+  eureka-server:
+    image: deshbandhu1975/eureka-server:1.0-SNAPSHOT
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+    depends_on:
+      - zipkin
   apigw:
-    image: desh1977/apigw:latest
+    image: deshbandhu1975/apigw:1.0-SNAPSHOT
     container_name: apigw
     ports:
       - "8083:8083"
@@ -53,22 +65,58 @@ services:
     depends_on:
       - zipkin
       - eureka-server
-  eureka-server:
-    image: deshbandhu1977/eureka-server:latest
-    container_name: eureka-server
+  customer:
+    image: deshbandhu1975/customer:1.0-SNAPSHOT
+    container_name: customer
     ports:
-      - "8761:8761"
+      - "8080:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
       - spring
+      - postgres
     depends_on:
       - zipkin
+      - eureka-server
+      - db
+      - rabbitmq
+  fraud:
+    image: deshbandhu1975/fraud:1.0-SNAPSHOT
+    container_name: fraud
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - zipkin
+      - eureka-server
+      - db
+      - rabbitmq
+  notification:
+    image: deshbandhu1975/notification:1.0-SNAPSHOT
+    container_name: notification
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+      - postgres
+
+    depends_on:
+      - zipkin
+      - eureka-server
+      - db
+      - rabbitmq
 networks:
   postgres:
     driver: bridge
   spring:
     driver: bridge
+
 volumes:
   postgres:
   pgadmin:

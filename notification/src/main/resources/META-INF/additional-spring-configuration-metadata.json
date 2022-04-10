@@ -1,8 +1,0 @@
-{
-  "properties": [
-    {
-      "name": "rabbitmq.queue.notification",
-      "type": "java.lang.String",
-      "description": "Description for rabbitmq.queue.notification."
-  }
-] }
