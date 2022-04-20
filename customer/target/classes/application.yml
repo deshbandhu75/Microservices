@@ -1,11 +1,8 @@
 server:
   port: 8080
-
-
 spring:
   application:
     name: customer
-
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -29,5 +26,6 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
+    enabled: false
 
 
